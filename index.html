@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karunakar Uppalapati - Health Informatics Professional</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+        
+        :root {
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff00;
+            --neon-purple: #8a2be2;
+            --neon-orange: #ff6600;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(20, 20, 40, 0.8);
+            --text-light: #e0e0e0;
+            --gradient: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--neon-cyan);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 24px;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--neon-cyan);
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            padding: 10px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        
+        .nav-links a.active {
+            color: var(--neon-cyan);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--neon-cyan);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px var(--neon-cyan)); }
+            to { filter: drop-shadow(0 0 40px var(--neon-pink)); }
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .hero-content .description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Orbitron', monospace;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 0;
+        }
+        
+        .btn:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-cyan);
+        }
+        
+        .btn.secondary {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+        
+        .btn.secondary:hover {
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        
+        .about-image {
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-placeholder {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark-bg);
+            margin: 0 auto;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .highlight {
+            color: var(--neon-cyan);
+            font-weight: 600;
+        }
+        
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .education-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-orange);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .education-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 102, 0, 0.2);
+        }
+        
+        .education-card h3 {
+            color: var(--neon-orange);
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 10px;
+        }
+        
+        .education-card .institution {
+            color: var(--neon-cyan);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .education-card .gpa {
+            color: var(--neon-green);
+            font-weight: 600;
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .skill-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-purple);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+            border-color: var(--neon-cyan);
+        }
+        
+        .skill-card h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .skill-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--neon-cyan);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--neon-cyan);
+        }
+        
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--gradient);
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding: 30px 0;
+            position: relative;
+            width: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            left: 50%;
+        }
+        
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-green);
+            max-width: 400px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -35px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -35px;
+        }
+        
+        .timeline-content h3 {
+            color: var(--neon-green);
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content .company {
+            color: var(--neon-cyan);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content .duration {
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .timeline-content li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .timeline-content li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-pink);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-top: 20px solid var(--neon-pink);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 0, 255, 0.2);
+        }
+        
+        .project-card h3 {
+            color: var(--neon-pink);
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 15px;
+        }
+        
+        .project-card .duration {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .project-card p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .project-card .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .tech-tag {
+            background: rgba(255, 0, 255, 0.1);
+            color: var(--neon-pink);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--neon-pink);
+        }
+        
+        .achievements-section {
+            margin-top: 60px;
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .achievement-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-orange);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 102, 0, 0.2);
+        }
+        
+        .achievement-card h4 {
+            color: var(--neon-orange);
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            text-align: center;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid var(--neon-green);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.2);
+        }
+        
+        .contact-item h3 {
+            color: var(--neon-green);
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                border: 1px solid var(--neon-cyan);
+                border-top: none;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-links a {
+                padding: 15px 0;
+                text-align: center;
+                border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+                font-size: 1.1rem;
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            .section {
+                padding: 80px 0 60px;
+                min-height: auto;
+            }
+            
+            .hero {
+                height: 100vh;
+                padding: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+            
+            .hero-content .description {
+                font-size: 1rem;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .profile-placeholder {
+                width: 180px;
+                height: 180px;
+                font-size: 1.8rem;
+            }
+            
+            .about-text {
+                font-size: 1.1rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .skill-card {
+                padding: 25px 20px;
+            }
+            
+            .timeline::before {
+                left: 15px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 40px;
+                justify-content: flex-start;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                left: 0;
+            }
+            
+            .timeline-content {
+                max-width: 100%;
+                padding: 25px 20px;
+            }
+            
+            .timeline-content::before {
+                left: -27px !important;
+                width: 15px;
+                height: 15px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .project-card {
+                padding: 25px 20px;
+            }
+            
+            .education-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .achievements-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-content .description {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+            }
+            
+            .profile-placeholder {
+                width: 150px;
+                height: 150px;
+                font-size: 1.5rem;
+            }
+            
+            .about-text {
+                font-size: 1rem;
+            }
+            
+            .skill-card,
+            .project-card,
+            .education-card,
+            .achievement-card,
+            .contact-item {
+                padding: 20px 15px;
+            }
+            
+            .skill-card h3,
+            .project-card h3,
+            .education-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .timeline-content {
+                padding: 20px 15px;
+            }
+            
+            .timeline-content h3 {
+                font-size: 1.1rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-tags,
+            .tech-stack {
+                gap: 6px;
+            }
+            
+            .skill-tag,
+            .tech-tag {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+                width: 180px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .skill-card,
+            .project-card,
+            .education-card,
+            .achievement-card,
+            .contact-item {
+                padding: 15px 12px;
+            }
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 4px;
+        }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Hidden sections */
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="showSection('home')">KU</div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showSection('home')" class="nav-link active">Home</a></li>
+                <li><a href="#" onclick="showSection('about')" class="nav-link">About</a></li>
+                <li><a href="#" onclick="showSection('skills')" class="nav-link">Skills</a></li>
+                <li><a href="#" onclick="showSection('experience')" class="nav-link">Experience</a></li>
+                <li><a href="#" onclick="showSection('projects')" class="nav-link">Projects</a></li>
+                <li><a href="#" onclick="showSection('contact')" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content floating">
+                    <h1>KARUNAKAR UPPALAPATI</h1>
+                    <div class="subtitle">HEALTH INFORMATICS PROFESSIONAL</div>
+                    <p class="description">
+                        Health Informatics professional with pharmacy expertise pursuing healthcare technology roles in clinical data analysis, EHR optimization, and pharmaceutical informatics. Proven track record with 98.6% ML model accuracy and 100% HIPAA compliance.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" onclick="showSection('projects')" class="btn">View Projects</a>
+                        <a href="#" onclick="showSection('contact')" class="btn secondary">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">ABOUT ME</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="profile-placeholder">KU</div>
+                </div>
+                <div class="about-text">
+                    <p>I am a dedicated <span class="highlight">Health Informatics professional</span> with a unique blend of pharmacy expertise and cutting-edge technology skills. Currently pursuing my Master's degree at Michigan Technological University, I specialize in bridging the gap between healthcare and technology.</p>
+                    
+                    <p>My passion lies in <span class="highlight">transforming healthcare through data-driven solutions</span>. With hands-on experience managing over 200+ patient records weekly and achieving 98.6% machine learning model accuracy, I bring both technical proficiency and real-world healthcare understanding to every project.</p>
+                    
+                    <p>I excel in <span class="highlight">EHR optimization, clinical data analysis, and pharmaceutical informatics</span>, always maintaining the highest standards of HIPAA compliance and data security. My goal is to advance patient-centered care through innovative health technology solutions.</p>
+                </div>
+            </div>
+            
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>Master of Science in Health Informatics</h3>
+                    <div class="institution">Michigan Technological University</div>
+                    <div class="duration">Expected Dec 2025</div>
+                    <div class="gpa">GPA: 3.86/4.00</div>
+                </div>
+                <div class="education-card">
+                    <h3>Bachelor of Pharmacy</h3>
+                    <div class="institution">Annamacharya College of Pharmacy (JNTUA)</div>
+                    <div class="duration">2019 - 2023</div>
+                    <div class="gpa">GPA: 3.3/4.00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">CORE COMPETENCIES</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Health Informatics & EHR</h3>
+                    <p>Specialized in electronic health record systems, clinical data management, and healthcare interoperability standards.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HL7</span>
+                        <span class="skill-tag">C-CDA</span>
+                        <span class="skill-tag">ICD-10</span>
+                        <span class="skill-tag">CDT Coding</span>
+                        <span class="skill-tag">HIPAA</span>
+                        <span class="skill-tag">Clinical Decision Support</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Programming & Analytics</h3>
+                    <p>Proficient in data science tools and programming languages for healthcare analytics and machine learning.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">NumPy</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Pharmaceutical QA</h3>
+                    <p>Extensive knowledge in pharmaceutical quality assurance, regulatory compliance, and analytical testing methods.</p>
+                    <div class="skill-tags">
+                        <span class="skill-tag">GMP</span>
+                        <span class="skill-tag">GLP</span>
+                        <span class="skill-tag">SOPs</span>
+                        <span class="skill-tag">FDA Compliance</span>
+                        <span class="skill-tag">HPLC</span>
+                        <span class="skill-tag">UV-Vis</span>
+                        <span class="skill-tag">FTIR</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">PROFESSIONAL EXPERIENCE</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Clinical Documentation & EHR Analyst</h3>
+                        <div class="company">Step to Smile Dental Clinic</div>
+                        <div class="duration">Nov 2022 - Dec 2023 | Hyderabad, India</div>
+                        <ul>
+                            <li>Managed <strong>200+ patient records weekly</strong> ensuring 100% HIPAA compliance</li>
+                            <li>Improved clinical documentation completeness by <strong>15%</strong></li>
+                            <li>Digitized <strong>500+ paper records</strong>, reducing retrieval time by 30%</li>
+                            <li>Collaborated with <strong>5+ dental surgeons</strong> to streamline documentation</li>
+                            <li>Identified <strong>20% recurring care trends</strong> for scheduling efficiency</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Quality Control / QA Intern</h3>
+                        <div class="company">RA Chem Pharma Ltd</div>
+                        <div class="duration">Mar 2022 - Aug 2022 | Hyderabad, India</div>
+                        <ul>
+                            <li>Conducted QC testing on <strong>100+ raw materials and finished batches</strong></li>
+                            <li>Reduced audit deviations by <strong>10%</strong> through SOP reviews</li>
+                            <li>Maintained <strong>200+ GMP documents</strong> with zero major non-compliance issues</li>
+                            <li>Collaborated with cross-functional teams across <strong>3 departments</strong></li>
+                            <li>Supported <strong>2+ successful new product launches</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<!-- Projects Section -->
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-title">FEATURED PROJECTS</h2>
+
+    <div class="projects-grid">
+      
+      <!-- 1 -->
+      <div class="project-card">
+        <h3>AI Health Risk Predictions</h3>
+        <div class="duration">Jan 2024 - Apr 2025</div>
+        <p>Developed and deployed an advanced machine learning system to predict hospital discharge outcomes. The model processes extensive EHR data and provides real-time risk assessments for emergency department physicians.</p>
+        <ul>
+          <li>• Cleaned and transformed <strong>63K EHR records</strong></li>
+          <li>• Integrated Logistic Regression model used by <strong>18 doctors</strong></li>
+          <li>• Achieved <strong>98.6% accuracy</strong> with SMOTE</li>
+          <li>• Implemented prediction API for decision support</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Scikit-learn</span>
+          <span class="tech-tag">SMOTE</span>
+          <span class="tech-tag">EHR Integration</span>
+          <span class="tech-tag">API Development</span>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="project-card">
+        <h3>Healthcare Fraud Detection System</h3>
+        <div class="duration">Jan 2025 - Apr 2025</div>
+        <p>Built a fraud detection system analyzing healthcare claims to identify suspicious billing patterns and reduce fraud. Helps prevent millions in fraudulent claims annually.</p>
+        <ul>
+          <li>• Analyzed <strong>1M+ claims</strong> for fraud indicators</li>
+          <li>• Engineered <strong>10 detection features</strong></li>
+          <li>• Achieved <strong>94% accuracy</strong> with Decision Trees</li>
+          <li>• Reduced false positives by <strong>12%</strong></li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Decision Trees</span>
+          <span class="tech-tag">Feature Engineering</span>
+          <span class="tech-tag">Fraud Analytics</span>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="project-card">
+        <h3>C-CDA Implementation & Interoperability</h3>
+        <div class="duration">Healthcare Standards Project</div>
+        <p>Implemented HL7 C-CDA standards for seamless healthcare data exchange between EHR systems, ensuring structured clinical document architecture compliance and interoperability.</p>
+        <ul>
+          <li>• Implemented <strong>3 core templates</strong>: CCD, Discharge Summary, Referral</li>
+          <li>• Validated interoperability across <strong>2 EHR systems</strong></li>
+          <li>• Ensured HL7 compliance with structured data</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">HL7</span>
+          <span class="tech-tag">C-CDA</span>
+          <span class="tech-tag">XML</span>
+          <span class="tech-tag">EHR Systems</span>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="project-card">
+        <h3>HealthAI – Symptom Analysis with ML</h3>
+        <div class="duration">Aug 2025</div>
+        <p>HealthAI predicts possible diseases based on user-entered symptoms. Designed to improve healthcare accessibility in underserved regions using ML.</p>
+        <ul>
+          <li>• Processed <strong>4,900+ patient records</strong></li>
+          <li>• Preprocessed with <strong>cleaning, tokenization, TF-IDF</strong></li>
+          <li>• Achieved <strong>97.5% accuracy</strong> with Random Forest</li>
+          <li>• Proposed chatbot & telemedicine deployment</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Scikit-learn</span>
+          <span class="tech-tag">TF-IDF</span>
+          <span class="tech-tag">Random Forest</span>
+          <span class="tech-tag">Healthcare AI</span>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="project-card">
+        <h3>Employee Performance Analysis System</h3>
+        <div class="duration">Aug 2025</div>
+        <p>Automated system integrating MySQL and Tkinter GUI to evaluate productivity, attendance, and deadlines, computing a performance rating (0–10).</p>
+        <ul>
+          <li>• Built <strong>MySQL + Tkinter GUI</strong></li>
+          <li>• Calculated KPIs: Completion, Adherence, Attendance</li>
+          <li>• Improved accuracy and reduced reporting time</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">Tkinter</span>
+          <span class="tech-tag">HR Analytics</span>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="project-card">
+        <h3>CIFAR-10 Image Classification with CNN</h3>
+        <div class="duration">Aug 2025</div>
+        <p>Implemented CNN on CIFAR-10 dataset and integrated Apache Spark for distributed training across VMs.</p>
+        <ul>
+          <li>• Trained on <strong>60,000 images</strong></li>
+          <li>• Built <strong>CNN with pooling, dropout, dense layers</strong></li>
+          <li>• Achieved <strong>70–75% validation accuracy</strong></li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">TensorFlow</span>
+          <span class="tech-tag">Keras</span>
+          <span class="tech-tag">Apache Spark</span>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="project-card">
+        <h3>Securing the Internet of Medical Things (IoMT)</h3>
+        <div class="duration">Aug 2025</div>
+        <p>Focused on IoMT security challenges in devices like insulin pumps, pacemakers, and wearables. Emphasized secure EHR integration for improved diagnostics and care.</p>
+        <ul>
+          <li>• Investigated vulnerabilities in <strong>connected devices</strong></li>
+          <li>• Proposed <strong>security frameworks</strong> for safer adoption</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">IoMT</span>
+          <span class="tech-tag">Cybersecurity</span>
+          <span class="tech-tag">EHR Integration</span>
+          <span class="tech-tag">Healthcare IoT</span>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="project-card">
+        <h3>Diabetes Prediction with PySpark</h3>
+        <div class="duration">Aug 2025</div>
+        <p>Machine learning models predicting diabetes outcomes with structured healthcare datasets, implemented in PySpark and Scikit-learn.</p>
+        <ul>
+          <li>• Applied <strong>Logistic Regression, Random Forest, KNN</strong></li>
+          <li>• Achieved <strong>80.7% accuracy</strong> with Random Forest</li>
+          <li>• Provided feature importance insights</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">PySpark</span>
+          <span class="tech-tag">Scikit-Learn</span>
+          <span class="tech-tag">Random Forest</span>
+          <span class="tech-tag">Logistic Regression</span>
+          <span class="tech-tag">KNN</span>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="project-card">
+        <h3>Optimizing Health Risk Predictions with AI</h3>
+        <div class="duration">Aug 2025</div>
+        <p>Improved hospital risk prediction by enhancing EHR data preprocessing and applying AI models to support discharge planning and clinical decisions.</p>
+        <ul>
+          <li>• Achieved <strong>98.6% accuracy</strong> with Logistic Regression</li>
+          <li>• Applied <strong>Decision Trees & Neural Networks</strong></li>
+          <li>• Built <strong>Power BI dashboards</strong></li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">Scikit-learn</span>
+          <span class="tech-tag">Power BI</span>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="project-card">
+        <h3>Breast Cancer Classification</h3>
+        <div class="duration">Feb 2025</div>
+        <p>Classified tumors as malignant or benign using ML models on the Breast Cancer Wisconsin Dataset.</p>
+        <ul>
+          <li>• Preprocessed <strong>569 samples</strong> with 30 tumor features</li>
+          <li>• Compared <strong>Random Forest, Gradient Boosting, SVM</strong></li>
+          <li>• Tuned hyperparameters with <strong>GridSearchCV</strong></li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Random Forest</span>
+          <span class="tech-tag">SVM</span>
+          <span class="tech-tag">Gradient Boosting</span>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="project-card">
+        <h3>Asthma Prediction with Big Data</h3>
+        <div class="duration">Nov 2024</div>
+        <p>Analyzed asthma risk factors using Apache Spark on Kaggle dataset of 2,392 patients, uncovering lifestyle and clinical influences on diagnosis.</p>
+        <ul>
+          <li>• Applied <strong>Logistic Regression</strong> (94.8% accuracy)</li>
+          <li>• Applied <strong>K-Means Clustering</strong> for patient profiling</li>
+          <li>• Modeled lung function with <strong>Linear Regression</strong></li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Apache Spark</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Scikit-learn</span>
+          <span class="tech-tag">Big Data Analytics</span>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="project-card">
+        <h3>Public Health Disease Surveillance Architecture</h3>
+        <div class="duration">Dec 2024</div>
+        <p>Infrastructure project enabling VM deployment with healthcare apps like OpenEMR and HAPI FHIR for interoperability and decision-making.</p>
+        <ul>
+          <li>• Deployed <strong>OpenEMR + HAPI FHIR</strong> on VMs</li>
+          <li>• Configured networking & security for interoperability</li>
+          <li>• Verified integration with <strong>Postman + Synthea</strong></li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">VMware vSphere</span>
+          <span class="tech-tag">OpenEMR</span>
+          <span class="tech-tag">HAPI FHIR</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Healthcare IT</span>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="project-card">
+        <h3>Leveraging Informatics for Healthy Lifestyle Choices</h3>
+        <div class="duration">May 2024</div>
+        <p>Explored precision informatics tools to promote healthy habits among young adults and professionals using wearables, EHR, and ML.</p>
+        <ul>
+          <li>• Applied <strong>ML on wearable & EHR data</strong></li>
+          <li>• Designed personalized lifestyle interventions</li>
+          <li>• Assisted UI design for digital wellness app</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">Wearables</span>
+          <span class="tech-tag">EHR</span>
+          <span class="tech-tag">Machine Learning</span>
+          <span class="tech-tag">Health Informatics</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CSS for 3-column grid -->
+<style>
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.project-card {
+  background: rgba(20, 20, 40, 0.8);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #ff00ff;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(255, 0, 255, 0.2);
+}
+.project-card h3 { color: #ff00ff; }
+.project-card .duration { color: #00ffff; margin-bottom: 10px; font-size: 0.9rem; }
+.project-card ul { margin: 15px 0; padding-left: 0; list-style: none; }
+.tech-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-tag {
+  background: rgba(255,0,255,0.1);
+  color: #ff00ff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid #ff00ff;
+}
+/* Responsive */
+@media (max-width: 1024px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+
+
+            
+            <div class="achievements-section">
+                <h2 class="section-title">ACHIEVEMENTS & RECOGNITION</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <h4>🏆 Chris Roy Unsung Employee of the Year</h4>
+                        <p>Michigan Tech Athletics & Recreation (2025)</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h4>🎓 Professional Certifications</h4>
+                        <p>Cancer Treatment & Precision Medicine, IPA Pharmaceutical Analysis, COVID-19 Awareness</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h4>👨‍🏫 STEM Education Leadership</h4>
+                        <p>Mind Trekkers Demonstrator: Engaged 500+ K-12 students, coordinated with 20+ volunteers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">GET IN TOUCH</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">
+                Ready to collaborate on innovative healthcare technology solutions? Let's connect and discuss how we can advance patient care through data-driven insights.
+            </p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <a href="mailto:kuppalap@mtu.edu">kuppalap@mtu.edu</a>
+                    <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9rem;">Best way to reach me for professional inquiries</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📱 Phone</h3>
+                    <a href="tel:+15173563782">(517) 356-3782</a>
+                    <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9rem;">Available for interviews and consultations</p>
+                </div>
+                <div class="contact-item">
+                    <h3>💼 LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/uppalapati-karunakar-4645022b7" target="linkedin">Connect with me</a>
+                    <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9rem;">Professional network and career updates</p>
+                </div>
+                <div class="contact-item">
+                    <h3>💻 GitHub</h3>
+                    <a href="https://github.com/KUPPALAP" target="_blank">View my repositories</a>
+                    <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9rem;">Open source projects and code samples</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 60px; padding: 30px; background: var(--card-bg); border-radius: 15px; border: 1px solid var(--neon-cyan);">
+                <h3 style="color: var(--neon-cyan); font-family: 'Orbitron', monospace; margin-bottom: 15px;">🎯 Currently Seeking</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 15px;">Healthcare Data Analyst | Clinical Informatics Specialist | EHR Optimization Roles</p>
+                <p style="opacity: 0.8;">Available for full-time opportunities starting January 2026</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Global variables
+        let currentSection = 'home';
+        
+        // Show specific section function
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the corresponding nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.textContent.toLowerCase() === sectionId.toLowerCase()) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            currentSection = sectionId;
+        }
+        
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            navLinks.classList.toggle('active');
+            
+            // Change hamburger icon
+            if (navLinks.classList.contains('active')) {
+                menuBtn.innerHTML = '✕';
+                menuBtn.style.color = 'var(--neon-pink)';
+            } else {
+                menuBtn.innerHTML = '☰';
+                menuBtn.style.color = 'var(--neon-cyan)';
+            }
+        }
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const navLinks = document.getElementById('navLinks');
+                const menuBtn = document.querySelector('.mobile-menu-btn');
+                
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+                menuBtn.style.color = 'var(--neon-cyan)';
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.9)';
+            }
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards for animation
+        document.querySelectorAll('.skill-card, .project-card, .timeline-content, .contact-item, .education-card, .achievement-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+            const currentIndex = sections.indexOf(currentSection);
+            
+            if (event.key === 'ArrowRight' && currentIndex < sections.length - 1) {
+                showSection(sections[currentIndex + 1]);
+            } else if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                showSection(sections[currentIndex - 1]);
+            }
+        });
+        
+        // Initialize animations on page load
+        window.addEventListener('load', function() {
+            // Add stagger animation to cards
+            setTimeout(() => {
+                document.querySelectorAll('.skill-card, .project-card, .contact-item').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
